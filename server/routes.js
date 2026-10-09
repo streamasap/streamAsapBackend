@@ -36,6 +36,8 @@ router.post('/auth/send-otp', async (req, res) => {
     await redis.set(redisKey, code, 'EX', 300);
 
     logger.info(`OTP generated for ${phone}: ${code}`);
+    
+    // send code to user phone using twilio
 
     return res.status(200).json({
       success: true,
